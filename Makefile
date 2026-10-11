@@ -10,6 +10,11 @@ $(BUILD)/stack_demo: src/stack.c src/main.c src/stack.h | $(BUILD)
 $(BUILD)/test_stack: src/stack.c tests/test_stack.c src/stack.h | $(BUILD)
 	$(CC) $(CFLAGS) -UNDEBUG src/stack.c tests/test_stack.c -o $@
 
+example: $(BUILD)/balanced_brackets
+
+$(BUILD)/balanced_brackets: src/stack.c examples/balanced_brackets.c src/stack.h | $(BUILD)
+	$(CC) $(CFLAGS) src/stack.c examples/balanced_brackets.c -o $@
+
 test: $(BUILD)/test_stack
 	./$(BUILD)/test_stack
 
@@ -19,4 +24,4 @@ $(BUILD):
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean
+.PHONY: all test clean example
