@@ -15,8 +15,12 @@ example: $(BUILD)/balanced_brackets
 $(BUILD)/balanced_brackets: src/stack.c examples/balanced_brackets.c src/stack.h | $(BUILD)
 	$(CC) $(CFLAGS) src/stack.c examples/balanced_brackets.c -o $@
 
-test: $(BUILD)/test_stack
+$(BUILD)/test_brackets: src/stack.c examples/balanced_brackets.c tests/test_brackets.c | $(BUILD)
+	$(CC) $(CFLAGS) -UNDEBUG -DNO_MAIN src/stack.c examples/balanced_brackets.c tests/test_brackets.c -o $@
+
+test: $(BUILD)/test_stack $(BUILD)/test_brackets
 	./$(BUILD)/test_stack
+	./$(BUILD)/test_brackets
 
 $(BUILD):
 	mkdir -p $(BUILD)
