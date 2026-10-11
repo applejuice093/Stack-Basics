@@ -25,3 +25,21 @@ history, function calls, expression parsing and depth-first search.
 ├── tests/                          # unit tests (make test)
 └── Makefile
 ```
+
+## Build and run
+
+Requires a C99 compiler (gcc or clang) and `make`.
+
+```bash
+make                     # builds build/stack_demo
+./build/stack_demo       # interactive menu: push, pop, peek, display
+make example
+./build/balanced_brackets "{[()]}"   # -> balanced
+make test                # runs all unit tests
+```
+
+Without make:
+
+```bash
+gcc -std=c99 -Wall src/stack.c src/main.c -o stack_demo
+```
