@@ -43,3 +43,26 @@ Without make:
 ```bash
 gcc -std=c99 -Wall src/stack.c src/main.c -o stack_demo
 ```
+
+## Using the stack in your own code
+
+```c
+#include "stack.h"
+
+Stack s;
+int top;
+stack_init(&s);
+stack_push(&s, 42);
+if (stack_pop(&s, &top) == STACK_OK) {
+    /* top == 42 */
+}
+```
+
+Every operation that can fail returns `STACK_OK`, `STACK_OVERFLOW` (push on a
+full stack) or `STACK_UNDERFLOW` (pop/peek on an empty stack) instead of
+printing or exiting, so the caller decides how to react. Capacity is set by
+`STACK_MAX` in `src/stack.h` (default 100).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
